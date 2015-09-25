@@ -64,3 +64,34 @@ vash: {
     },
 }
 ```
+
+if you ar intreastead in multiple destenations for a single vash file:
+
+```js
+vash: {
+    compile: {
+        files: {
+            'test/fixtures/unit.vash': {
+                'theme1':{
+                    dest: 'tmp/vash.html',
+                    model: {
+                        theme: 'theme1', name: 'fixtures'
+                    }
+                },
+                'theme2':{
+                    dest: 'tmp/vash.html',
+                    model: {
+                        theme: 'theme2', name: 'bob'
+                    }
+                },
+            },
+        },
+        options:{
+            process: function(content, path){
+                return content.replace(/<!---->/gi, '');
+            }
+        }
+    },
+}
+```
+
