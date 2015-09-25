@@ -57,6 +57,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'vash', 'nodeunit', 'clean']);
+
+    grunt.registerTask('test', ['jshint', 'vash', 'nodeunit', 'clean']);
+
+    grunt.registerTask('default', ['test']);
 
 };
