@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> | الصَّفّ التَّفاعُلِيّ</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<link href="themes/theme1/theme.css" rel="stylesheet" />
+	</head>
+	<body >
+		<div class="default_header">
+			<div class="container">
+				<img src="/themes/default/meizam_logo.png" />
+				<img src="/themes/default/edu_logo.png" />
+				<img src="/themes/default/logo_w.png" />
+				<span>الصَّفّ التَّفاعُلِيّ</span>
+			</div>
+		</div>
+
+		<div id="toolbar">
+    <a href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar,.toolbar-tool,#toolbar>a', removeClass:'active'},{selector:'#toolbar>.no-panel-btn', addClass:'active', if:'#toolbar'}]" class="no-panel-btn tool-view view-back-hover view-back-active active"><i class="cm-view"></i><span>{{::translate('TOOLBAR.VIEW.TITLE')}}</span></a>
+    <a href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn', addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>a,.toolbar-tool .extended-settings', removeClass:'active'},{selector:'.tool-pages', toggleClass:'active'},{selector:'#toolbar', addClass:'active', if:'#toolbar>a.active'},{selector:'#toolbar>.no-panel-btn', removeClass:'active', if:'#toolbar>a.active'}]" class="panel-btn tool-pages pages-back-hover pages-back-active"><i class="cm-pages"></i><span>{{::translate('TOOLBAR.PAGES.TITLE')}}</span></a>
+    <a href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn', addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>a,.toolbar-tool .extended-settings', removeClass:'active'},{selector:'.tool-settings', toggleClass:'active'},{selector:'#toolbar', addClass:'active', if:'#toolbar>a.active'},{selector:'#toolbar>.no-panel-btn', removeClass:'active', if:'#toolbar>a.active'}]" class="panel-btn tool-settings settings-back-hover settings-back-active"><i class="cm-settings"></i><span>{{::translate('TOOLBAR.SETTINGS.TITLE')}}</span></a>
+    <a href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn', addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>a,.toolbar-tool .extended-settings', removeClass:'active'},{selector:'.tool-publish', toggleClass:'active'},{selector:'#toolbar', addClass:'active', if:'#toolbar>a.active'},{selector:'#toolbar>.no-panel-btn', removeClass:'active', if:'#toolbar>a.active'}]" class="panel-btn tool-publish publish-back-hover publish-back-active"><i class="cm-publish"></i><span>{{::translate('TOOLBAR.PUBLISH.TITLE')}}</span></a>
+</div>
+<div class="toolbar-tool tool-pages">
+    <div class="animation-content">
+        <h3>{{::translate('TOOLBAR.PAGES.FULLTITLE')}}</h3>
+        <h4 ng-bind-html="translate('TOOLBAR.PAGES.SUBTITLE')"></h4>
+        <a class="cm-cancel" href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn', addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>.panel-btn', removeClass:'active'}]"></a>
+
+
+        <button ng-click="addPage()" class="pages-back"><i class="cm-plus"></i>{{::translate('TOOLBAR.PAGES.ADDPAGE')}}</button>
+
+        <div sortable="{collection:pages,handle:'span',placeholder:'active'}" class="ul">
+            <a ng-repeat="page in pages" class="li" ng-class="{active:obj.current_page==page}" ng-href="{{'#/page/' + sharedObj.unit.Id + '/' + $index}}">
+                <span><i class="cm-drag-horizontal"></i></span>{{page.Title}}<i class="cm-settings" ng-click="obj.current_page_settings=page;$event.preventDefault();"></i>
+            </a>
+        </div>
+    </div>
+    <div class="extended-settings" ng-class="{'active':obj.current_page_settings}">
+        <div class="animation-content">
+            <h3><i class="cm-settings pages-color"></i> {{::translate('TOOLBAR.PAGES.SETTINGS')}}</h3>
+            <div class="edit-box">
+                {{::translate('TOOLBAR.PAGES.NAME')}}<br />
+                <input ng-model="obj.current_page_settings.Title" />
+            </div>
+            <div class="animation-content btns">
+                <button class="invert pages-color" ng-click="deletePage(obj.current_page_settings)" ng-if="pages.length>1">{{::translate('TOOLBAR.PAGES.DELETE')}}</button>
+                <button class="invert pages-color" ng-click="duplicatePage(obj.current_page_settings)">{{::translate('TOOLBAR.PAGES.DUPLICATE')}}</button>
+                <button class="pages-back" ng-click="obj.current_page_settings=0">{{::translate('CLOSE')}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="toolbar-tool tool-settings">
+    <div class="animation-content">
+        <h3>{{::translate('TOOLBAR.SETTINGS.TITLE')}}</h3>
+        <h4 ng-bind-html="translate('TOOLBAR.SETTINGS.SUBTITLE')"></h4>
+        <a class="cm-cancel" href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn', addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>.panel-btn', removeClass:'active'}]"></a>
+
+        <ul>
+            <li><span class="settings-color"><i class="cm-side"></i></span> {{::translate('TOOLBAR.SETTINGS.POINTS')}}</li>
+        </ul>
+    </div>
+</div>
+<div class="toolbar-tool tool-publish">
+    <div class="animation-content">
+        <h3>{{::translate('TOOLBAR.PUBLISH.FULLTITLE')}}</h3>
+        <h4 ng-bind-html="translate('TOOLBAR.PUBLISH.SUBTITLE')"></h4>
+        <a class="cm-cancel" href="#" ng-toggle-overflow="{target:'.toolbar-tool',ifclass:'active',timeout:600}" ng-toggle-class="[{selector:'#toolbar>.no-panel-btn',addClass:'active'},{selector:'#toolbar,.toolbar-tool,#toolbar>.panel-btn',removeClass:'active'}]"></a>
+
+        <div class="grades">
+            <span ng-repeat="c in sharedObj.metadata.grades" ng-class="{'active':sharedObj.unit.GradeLevels_Id.hasGrade(c.id),'wide':c.name.length>3}" ng-click="sharedObj.unit.GradeLevels_Id.toggleGrade(c.id)">{{::c.name}}</span>
+        </div>
+
+        <h4 ng-bind-html="translate('TOOLBAR.PUBLISH.UNIT_STATUS')" class="nob-margin"></h4>
+        <div class="status">
+            <i class="{{sharedObj.unit.Permissions?'cm-publish':'cm-working'}}"></i>
+            {{translate('TOOLBAR.PUBLISH.'+(sharedObj.unit.Permissions?'PUBLIC':'PRIVATE'))}}
+        </div>
+        <div class="link" ng-if="sharedObj.unit.Permissions">
+            <h4 ng-bind-html="translate('TOOLBAR.PUBLISH.LINK')" class="nob-margin"></h4>
+            <input ng-model="sharedObj.link" ng-readonly="true" onclick="this.select();" />
+        </div>
+        <button class="change_status" ng-click="sharedObj.unit.Permissions=+(!sharedObj.unit.Permissions)">{{translate('TOOLBAR.PUBLISH.MAKE_'+(sharedObj.unit.Permissions?'PRIVATE':'PUBLIC'))}}</button>
+    </div>
+</div>
+
+
+<div class="previews">
+        <a ng-click="getPreview()" ng-href="{{'#/preview/'+sharedObj.unit.Id+'/'+sharedObj.current_page_index}}"><i class="cm-preview"></i>{{::translate('PREVIEW')}}</a>
+        <a ng-click="save()" ng-if="sharedObj.matrixDirty" class="save"><i class="cm-save"></i>{{::translate('SAVE')}}</a>
+    </div>
+
+<div class="tools {{controlls.length?'open':''}}">
+        <a href="#" ng-toggle-class="[{selector:'.tools',toggleClass:'open'},{selector:'.tools > a i', toggleClass:'cm-expand'},{selector:'.tools > a i', toggleClass:'cm-plus'}]"><i class="cm-expand"></i></a>
+        <div class="dragToolbar" drag-toolbar="controlls">
+        </div>
+    </div>
+
+<div content-manager-pagination="{prefix:'#/page/' + sharedObj.unit.Id,current_page:sharedObj.current_page_index}" content-manager-pagination-pages="pages"></div>
+<div class="container dropArea" drop-area="sharedObj.matrix" drop-area-settings="{max_columns:4,direction:theme.lang=='en'?'ltr':'rtl'}" ctr-s="save"></div>
+
+
+ 
+		<div class="footer">تم إنشاءه عن طريق مدير المحتوى من بيت سنونيت.</div>
+		
+		
+		<script>if (location.host.indexOf('galim') > -1) document.domain = "galim.org.il";</script>
+		
+		<script>
+			var $win = $(window), $header = $('body');
+			$('body > .container').css({'min-height':$win.innerHeight()-115});
+			$win.on('scroll',function(){
+				if($win.scrollTop() > 60) 
+					$header.addClass('scroll-fixed');
+				else
+					$header.removeClass('scroll-fixed');
+			})
+		</script>
+	</body>
+</html>

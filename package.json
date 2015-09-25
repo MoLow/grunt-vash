@@ -1,0 +1,39 @@
+{
+  "name": "grunt-vash",
+  "description": "Compile Vash templates",
+  "version": "0.1.0",
+  "author": {
+    "name": "Moshe Atlow",
+    "url": "https://github.com/MoLow"
+  },
+  "repository": "https://github.com/MoLow/grunt-vash",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "chalk": "^1.0.0",
+    "vash": "^0.9.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-internal": "^0.4.6",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "^0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": ">=0.4.0"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "files": [
+    "tasks"
+  ]
+}

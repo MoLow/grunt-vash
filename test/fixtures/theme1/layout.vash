@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>@model.title | الصَّفّ التَّفاعُلِيّ</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		@html.block('css')
+	</head>
+	<body @html.raw(model.bootstrap?' ng-controller="PageAnswerController"':'')>
+		<div class="default_header">
+			<div class="container">
+				<img src="/themes/default/meizam_logo.png" />
+				<img src="/themes/default/edu_logo.png" />
+				<img src="/themes/default/logo_w.png" />
+				<span>الصَّفّ التَّفاعُلِيّ</span>
+			</div>
+		</div>
+
+		@html.block('content')
+ 
+		<div class="footer">تم إنشاءه عن طريق مدير المحتوى من بيت سنونيت.</div>
+		
+		
+		<script>if (location.host.indexOf('galim') > -1) document.domain = "galim.org.il";</script>
+		@html.block('js')
+		<script>
+			var $win = $(window), $header = $('body');
+			$('body > .container').css({'min-height':$win.innerHeight()-115});
+			$win.on('scroll',function(){
+				if($win.scrollTop() > 60) 
+					$header.addClass('scroll-fixed');
+				else
+					$header.removeClass('scroll-fixed');
+			})
+		</script>
+	</body>
+</html>
